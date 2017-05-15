@@ -1,0 +1,143 @@
+/*css reset*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+}
+body {
+    padding: 0 5px;
+}
+section {
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1px;
+}
+/*profile start*/
+.profile {
+    text-align: center;
+    background: #e2ded3;
+    padding: 1px;
+}
+
+.profile img {
+    max-width: 120px;
+    max-height: 120px;
+    border-radius: 50%;
+    margin-top: 50px;
+    margin-bottom: 40px;
+}
+.profile .tags {
+    padding: 24px 0 35px;
+    margin: 0 auto 34px;
+
+}
+@media (max-width: 672px){
+    .profile .tags {
+    width: 300px;
+    }
+}
+@media (max-width: 320px){
+    .profile .tags {
+        width: 100%;
+    }
+}
+.profile .tags span {
+    background: #eae8e2;
+    padding: 5px 20px;
+    margin: 10px;
+    display: inline-block;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.profile .tags span:first-child {
+    margin-left: 0;
+}
+ /*summary start*/
+.summary {
+    background: #eae8e2;
+    text-align: center;
+}
+.summary h2 {
+    margin-top: 75px;
+    margin-bottom: 35px;
+
+}
+.summary span {
+    display: inline-block;
+    background: #e2ded3;
+    border-radius: 0.5em;
+    padding: 5px 20px;
+}
+
+.summary h2.status2 {
+    display: none;
+
+}
+@media (max-width: 320px) {
+    .summary h2.status1 {
+        display: none;
+    }
+    .summary h2.status2 {
+        display: block;
+    }
+}
+.summary p {
+    margin-top: 20px;
+}
+.summary p:last-child {
+    margin-bottom: 100px;
+}
+/*album start*/
+.album {
+    background: #e2ded3;
+    padding: 10px 0;
+}
+.album ul {
+    padding: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+}
+@media (max-width: 883px) {
+    .album ul {
+        height: 1950px;
+        overflow: hidden;
+    }
+}
+@media (max-width: 595px){
+    .album ul {
+        height: 3220px;
+    }
+}
+.album li {
+    width: 288px;
+
+}
+.album li img{
+    width: 100%;
+    height: 478px;
+    border: 1px solid;
+    border-radius: 5px;
+    margin-top: 32px;
+}
+.album li h3 {
+    margin-top: 20px;
+    margin-bottom: 14px;
+}
+.album li h3 span {
+    background: #eae8e2;
+    border-radius: 5px;
+    padding: 0 1em;
+}
+.album li p {
+    background: #eae8e2;
+    border-radius: 3px;
+    padding: 0 1em;
+}
