@@ -10,6 +10,7 @@ ul {
 }
 body {
     padding: 0 5px;
+    font-family: "microsoft YaHei";
 }
 section {
     max-width: 960px;
@@ -107,13 +108,12 @@ section {
 }
 @media (max-width: 883px) {
     .album ul {
-        height: 1950px;
-        overflow: hidden;
+        /*height: 1950px;*/
     }
 }
 @media (max-width: 595px){
     .album ul {
-        height: 3220px;
+        /*height: 3220px;*/
     }
 }
 .album li {
@@ -140,4 +140,24 @@ section {
     background: #eae8e2;
     border-radius: 3px;
     padding: 0 1em;
+}
+.loadmore {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.loadmore .loadMoreButton  {
+    background: #f2ede1;
+    background-image: linear-gradient(to bottom, #f2ede1, #e2ded3);
+    border-radius: 28px;
+    color: #000000;
+    font-size: 20px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+}
+
+.loadmore .loadMoreButton:hover {
+    background: #f5ebd2;
+    background-image: linear-gradient(to bottom, #f5ebd2, #e0d6bc);
+    text-decoration: none;
 }
