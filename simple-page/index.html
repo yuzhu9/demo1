@@ -6,6 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style.css">
+    <link rel="prefetch" href="http://opdzp4hj6.bkt.clouddn.com/image/demo/Ellipsis.gif">  /* 预加载 */
     <title>Document</title>
 </head>
 <body>
@@ -83,42 +84,70 @@
 <script>
     let list = document.querySelector('#list')
     let n = 1
-    let onOff = true
+    let hasNext = true      // 设置是否有下一页开关
+    let loading = false     // 设置是否正在加载开关
+
     function loadMore() {
-        if (onOff) {
-            let request = new XMLHttpRequest()
-            request.open('GET', `./page-${n}`)
-            request.onload = function () {
-                n += 1
-                let response = request.responseText
-                let data = window.JSON.parse(response)
-                for (var i = 0; i < data.content.length; i++) {
-                    let listString =
-                        `<li>
-                            <img src="${data.content[i].url}">
+        if (loading === true) {
+            return
+        }
+        if (hasNext === false) {
+            return
+        }
+        let request = new XMLHttpRequest()
+        request.open('GET', `./page-${n}`)
+        request.onerror = function () {
+            loading = false
+        }
+        request.onload = function () {
+            loading = false
+            n += 1
+            let response = request.responseText
+            let data = window.JSON.parse(response)
+            for (var i = 0; i < data.content.length; i++) {
+                let listString =
+                    `<li>
+                            <img src="http://opdzp4hj6.bkt.clouddn.com/image/demo/Ellipsis.gif" data-src="${data.content[i].url}">
                             <h3><span>${data.content[i].name}</span></h3>
                             <p>${data.content[i].describe}</p>
                         </li>`
-                    list.insertAdjacentHTML('beforeend', listString);
-                }
-                if (data.hasMorePages === false) {
-                    loadMoreButton.disabled = true
-                    loadMoreButton.textContent = '本次展示已结束，感谢观看 (●′ω`●) '
-                    onOff = false
-                }
+                list.insertAdjacentHTML('beforeend', listString);
             }
-            request.send()
+            if (data.hasMorePages === false) {
+                loadMoreButton.textContent = '本次展示已结束，感谢观看 (●′ω`●) '
+                hasNext = false
+            }
+        }
+        loading = true
+        request.send()
+
+    }
+//    loadMoreButton.onclick = loadMore        点击按钮实现加载(手动加载）
+
+    window.onscroll = function(){
+        if (showUpOnScreen(loadMoreButton) === true){
+            loadMore()
+        }
+
+        let images = document.querySelectorAll('img[data-src]')      // 鼠标滚动时就会动态选择images
+        for(var i=0;i<images.length;i++){
+            if(showUpOnScreen(images[i])){
+                images[i].src = images[i].getAttribute('data-src')
+                images[i].removeAttribute('data-src')
+            }
         }
     }
-    loadMoreButton.onclick = loadMore
 
-    window.onscroll = function () {
+//    封装函数作用：元素出现在屏幕中时返回true,否则返回false
+    function showUpOnScreen(element){
         let doc = document.documentElement
         let height = doc.clientHeight
-        let viewportOffset = loadMoreButton.getBoundingClientRect()
-        let buttonTop = viewportOffset.top
-        if (buttonTop < height - 55) {
-            loadMore()
+        let viewportOffset = element.getBoundingClientRect()
+        let elementTop = viewportOffset.top
+        if(elementTop<= height){
+            return true
+        }else {
+            return false
         }
     }
 </script>
